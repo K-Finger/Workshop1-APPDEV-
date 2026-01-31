@@ -6,12 +6,22 @@ BASE_URL = "https://www.fruityvice.com/api/fruit"
 
 def get_all_fruits():
     """Fetch all fruits from the API"""
-    pass
+    response = requests.get(f"{BASE_URL}/all")
+
+    if response.status_code != 200:
+      raise Exception("Request failed")
+
+    return response.json()
 
 
 def get_fruit_by_name(name):
     """Fetch a specific fruit by name"""
-    pass
+    response = requests.get(f"{BASE_URL}/{name}")
+
+    if response.status_code != 200:
+      raise Exception("Request failed")
+
+    return response.json()
 
 
 def display_fruit_info(fruit):
