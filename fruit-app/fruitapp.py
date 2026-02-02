@@ -1,4 +1,4 @@
-import requests
+# Import an HTTP library for requests
 from charting import create_fruit_bar_chart
 
 BASE_URL = "https://www.fruityvice.com/api/fruit"
@@ -6,24 +6,14 @@ BASE_URL = "https://www.fruityvice.com/api/fruit"
 
 def get_all_fruits():
     """Fetch all fruits from the API"""
-    response = requests.get(f"{BASE_URL}/all")
-
-    if response.status_code != 200:
-      raise Exception("Request failed")
-
-    return response.json()
 
 
 def get_fruit_by_name(name):
     """Fetch a specific fruit by name"""
-    response = requests.get(f"{BASE_URL}/{name}")
-
-    if response.status_code != 200:
-      raise Exception("Request failed")
-
-    return response.json()
 
 
+
+##################################################################
 def display_fruit_info(fruit):
     """Display fruit information in the console"""
     print("\n" + "=" * 50)
@@ -114,7 +104,7 @@ if __name__ == "__main__":
 
             # HANDLE REQUEST ERROR
             except Exception:
-                print(f"\nType '{fruit_name}' correctly bozo")
+                print(f"\nType '{fruit_name}' correctly")
 
         elif choice == "2":
             display_all_fruits()
