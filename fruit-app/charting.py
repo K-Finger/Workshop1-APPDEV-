@@ -1,4 +1,8 @@
 import matplotlib.pyplot as plt
+import json
+import sys
+from datetime import datetime
+
 
 def create_fruit_bar_chart(names, values, nutrition_type, top_n):
     """Create a horizontal bar chart for fruit nutrition data."""

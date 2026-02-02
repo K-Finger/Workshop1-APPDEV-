@@ -113,7 +113,7 @@ if __name__ == "__main__":
                 display_fruit_info(fruit)
 
             # HANDLE REQUEST ERROR
-            except requests.exceptions.HTTPError:
+            except Exception:
                 print(f"\nType '{fruit_name}' correctly bozo")
 
         elif choice == "2":
