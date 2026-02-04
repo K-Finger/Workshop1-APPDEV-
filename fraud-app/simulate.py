@@ -7,7 +7,7 @@ URL = "http://localhost:8080/transactions"
 users = ["alice", "bob", "charlie", "dave", "eve"]
 base_time = datetime.now()
 
-for i in range(1000):
+for i in range(50):
     txn = {
         "user_id": random.choice(users),
         "price": round(random.uniform(5, 500), 2),
