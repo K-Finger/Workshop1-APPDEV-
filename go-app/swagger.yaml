@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: Go Items API
+  version: 1.0.0
+  description: In-memory items CRUD API
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /items:
+    get:
+      summary: Get all items
+      responses:
+        "200":
+          description: List of items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example: ["apple", "banana", "cherry"]
+
+    post:
+      summary: Add an item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [item]
+              properties:
+                item:
+                  type: string
+            example:
+              item: apple
+      responses:
+        "201":
+          description: Item added, returns updated list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example: ["apple"]
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    put:
+      summary: Update an item by index
+      parameters:
+        - name: index
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 0
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [item]
+              properties:
+                item:
+                  type: string
+            example:
+              item: banana
+      responses:
+        "200":
+          description: Item updated, returns updated list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example: ["banana"]
+        "400":
+          description: Invalid index or request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+    delete:
+      summary: Delete an item by index
+      parameters:
+        - name: index
+          in: query
+          required: true
+          schema:
+            type: integer
+          example: 0
+      responses:
+        "200":
+          description: Item deleted, returns updated list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              example: ["cherry"]
+        "400":
+          description: Invalid index
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      example:
+        error: invalid index

@@ -20,6 +20,8 @@ var transactions = []Transaction{} // Initialize a dynamic array (slice) as empt
 // --------------------------------------------------------------- //
 
 // Middleware
+// It takes in a handler and returns a new handler. 
+// The new handler does everything the original does, plus logging.
 func logRequest(handler http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -36,7 +38,7 @@ func main() {
 			var t Transaction
 			json.NewDecoder(r.Body).Decode(&t) // JSON encoding and decoding
 			transactions = append(transactions, t)
-			json.NewEncoder(w).Encode(t)
+			json.NewEncoder(w).Encode(t) // no return. writes in a stream back to client
 		} else {
 			json.NewEncoder(w).Encode(transactions) // Send transactions to the client using a response writer
 		}
